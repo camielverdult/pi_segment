@@ -7,7 +7,7 @@
 #include <chrono>
 #include <thread>
 
-#define USING_WIREPI 0
+#define USING_WIREPI 1
 
 #if USING_WIREPI
     // Use wiringpi
@@ -66,6 +66,10 @@ void write_number_to_segment(int number, std::vector<int> gpio_pins, std::vector
     }
 }
 
+void print_usage() {
+    std::cout << "\nUsage:  pi_segment [numbers]\n\nPrint out numbers\n\nExample:\n\nPrint out numbers 1 through 4: ./pi_segment 1 2 3 4\n\nKeep looping numbers: ./pi_segment\n";
+}
+
 int main(int argc, char* argv[]) {
 
 #if USING_WIREPI
@@ -89,13 +93,40 @@ int main(int argc, char* argv[]) {
 
     setup_gpio(gpio_pins);
 
-    while (true) {
-        for (int i = 0; i < 10; i++) {
-            std::cout << "Writing " << i << " to seven segment.\n";
-            write_number_to_segment(i, gpio_pins, number_matrix);
-            std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+    if (argc == 1) {
+        // There are no command line arguments, we just keep counting numbers on the seven segment display
+        while (true) {
+            for (int i = 0; i < 10; i++) {
+                std::cout << "Writing " << i << " to seven segment.\n";
+                write_number_to_segment(i, gpio_pins, number_matrix);
+                std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+            }
+            std::cout << "\n\n\n";
         }
-        std::cout << "\n\n\n";
+    } else {
+
+        // Push arguments into vector
+        std::vector<std::string> arguments;
+        for (int i = 1; i < argc; i++) {
+            arguments.push_back(std::string(argv[i]));
+        }
+
+        if (arguments[0].compare("-h") == 0 || arguments[0].compare("--help") == 0) {
+            print_usage();
+        }
+
+        for (std::string arg : arguments) {
+            try {
+                int number_to_display = std::stoi(arg);
+                std::cout << "Writing " << number_to_display << " to seven segment.\n";
+                write_number_to_segment(number_to_display, gpio_pins, number_matrix);
+                std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+            } catch (std::invalid_argument const& ex) {
+                std::cout << "Invalid number: " << arg << '\n';
+                exit(1);
+            }
+        }
+
     }
 
     return EXIT_SUCCESS;
