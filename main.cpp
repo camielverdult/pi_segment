@@ -112,6 +112,7 @@ int main(int argc, char* argv[]) {
         }
 
         if (arguments[0].compare("-h") == 0 || arguments[0].compare("--help") == 0) {
+            // This argument is an invalid character
             print_usage();
             exit(0);
         }
