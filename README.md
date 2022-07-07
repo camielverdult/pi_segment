@@ -8,7 +8,7 @@ sudo apt update
 sudo apt install cmake clang llvm ninja-build git-core -y
 ```
 
-## Installation of bcm2835
+## Installation of BCM2835
 
 ```
 cd ~
@@ -20,7 +20,7 @@ make
 sudo make install
 ```
 
-## Installation of wiringpi
+## Installation of WiringPi
 
 ```
 cd ~
