@@ -1,6 +1,6 @@
 # pi_segment
 
-This is a small program that uses either wiringpi or the bcm2835 library to interact with Raspberry Pi GPIOs, to write out a number onto a common cathode 7-segment display.
+This is a small program that uses either WiringPi or the BCM2835 library to interact with Raspberry Pi GPIOs, to write out a number onto a common cathode 7-segment display.
 
 ## Installation of build tools
 ```
@@ -37,7 +37,17 @@ git clone https://github.com/camielverdult/pi_segment
 cd pi_segment
 cmake .
 cmake --build .
-./pi_segment
+zero@zero:~/pi_segment $ ./pi_segment --help
+
+Usage:  pi_segment [numbers]
+
+Print out numbers
+
+Example:
+
+Print out numbers 1 through 4: ./pi_segment 1 2 3 4
+
+Keep looping numbers: ./pi_segment
 ```
 
 ## Pinout on raspberry pi
