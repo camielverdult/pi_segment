@@ -11,12 +11,12 @@ sudo apt install cmake clang llvm ninja-build git-core -y
 ## Installation of bcm2835
 
 ```
-cd ~                  
-wget http://www.airspayce.com/mikem/bcm2835/bcm2835-1.58.tar.gz                       
-tar xvfz bcm2835-1.58.tar.gz;                      
-cd bcm2835-1.58;                       
-./configure;                      
-make;        
+cd ~
+wget http://www.airspayce.com/mikem/bcm2835/bcm2835-1.58.tar.gz
+tar xvfz bcm2835-1.58.tar.gz
+cd bcm2835-1.58
+./configure
+make
 sudo make install
 ```
 
