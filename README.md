@@ -33,6 +33,8 @@ gpio readall
 ## Compilation and running this program
 
 ```
+git clone https://github.com/camielverdult/pi_segment
+cd pi_segment
 cmake .
 cmake --build .
 ./pi_segment
